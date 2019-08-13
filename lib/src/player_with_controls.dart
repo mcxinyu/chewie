@@ -14,38 +14,46 @@ class PlayerWithControls extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChewieController chewieController = ChewieController.of(context);
 
-    return Center(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        child: AspectRatio(
-          aspectRatio:
-              chewieController.aspectRatio ?? _calculateAspectRatio(context),
-          child: _buildPlayerWithControls(chewieController, context),
-        ),
-      ),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+//      child: AspectRatio(
+//        aspectRatio:
+//        chewieController.aspectRatio ?? _calculateAspectRatio(context),
+//        child: _buildPlayerWithControls(chewieController, context),
+//      ),
+      child: _buildPlayerWithControls(chewieController, context),
     );
   }
 
-  Container _buildPlayerWithControls(
+  Widget _buildPlayerWithControls(
       ChewieController chewieController, BuildContext context) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          chewieController.placeholder ?? Container(),
-          Center(
-            child: Hero(
-              tag: chewieController.videoPlayerController,
-              child: AspectRatio(
-                aspectRatio: chewieController.aspectRatio ??
-                    _calculateAspectRatio(context),
-                child: VideoPlayer(chewieController.videoPlayerController),
-              ),
+    return Stack(
+      children: <Widget>[
+        Align(
+          alignment: Alignment.center,
+          child: chewieController.placeholder ?? Container(),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Hero(
+            tag: chewieController.videoPlayerController,
+            child: AspectRatio(
+              aspectRatio: chewieController.aspectRatio ??
+                  _calculateAspectRatio(context),
+              child: VideoPlayer(chewieController.videoPlayerController),
             ),
           ),
-          chewieController.overlay ?? Container(),
-          _buildControls(context, chewieController),
-        ],
-      ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: chewieController.overlay ?? Container(),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: _buildControls(context, chewieController),
+        ),
+      ],
     );
   }
 
