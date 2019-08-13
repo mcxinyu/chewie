@@ -11,3 +11,5 @@ pubspec.lock
 .iml
 Podfile.lock
 chewie.iml
+/lib/generated/i18n.dart
+/res/values/strings_en.arb
