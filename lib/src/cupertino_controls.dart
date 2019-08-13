@@ -149,7 +149,6 @@ class _CupertinoControlsState extends State<CupertinoControls> {
                         _buildRemaining(iconColor)
                       ],
                     ),
-
             ),
           ),
         ),
